@@ -30,48 +30,34 @@ class DaysFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val root = inflater.inflate(R.layout.fragment_days, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_days, container, false)
-
-//        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
-//            when (DateAndPosition.positionConvertToDate(position).get(Calendar.DAY_OF_WEEK)) {
-//                1 -> week = "日"
-//                2 -> week = "一"
-//                3 -> week = "二"
-//                4 -> week = "三"
-//                5 -> week = "四"
-//                6 -> week = "五"
-//                7 -> week = "六"
-//            }
-//            week += """
-//
-//                ${DateAndPosition.pTodd(position)}
-//                """.trimIndent()
-//            tab.text = week
-//
-//        }.attach()
-
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.viewPager2.adapter = DaysPagerAdapter(this)
+        binding.viewPager2.offscreenPageLimit = 1
+        binding.viewPager2.setCurrentItem(50, false)
 
-        val pagerAdapterDays = PagerAdapter(this.requireActivity())
-//        binding.viewPager2.adapter = pagerAdapterDays
-//        Log.d(TAG, "onCreateView: ")
-//        binding.viewPager2.offscreenPageLimit = 1
-//        binding.viewPager2.setCurrentItem(1, false)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            when (DateAndPosition.positionConvertToDate(position).get(Calendar.DAY_OF_WEEK)) {
+                1 -> week = "日"
+                2 -> week = "一"
+                3 -> week = "二"
+                4 -> week = "三"
+                5 -> week = "四"
+                6 -> week = "五"
+                7 -> week = "六"
+            }
+            week += """
 
+                ${DateAndPosition.pTodd(position)}
+                """.trimIndent()
+            tab.text = week
 
-        var vp2: ViewPager2 = view.findViewById(R.id.viewPager2)
-        vp2.adapter = pagerAdapterDays
-//        binding.viewPager2.adapter = pagerAdapterDays
-        var tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
-        TabLayoutMediator(tabLayout, vp2) { tab, position ->
-            tab.text = position.toString()
         }.attach()
 
     }
