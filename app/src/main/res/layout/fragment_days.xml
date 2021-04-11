@@ -30,7 +30,7 @@
                 app:tabGravity="fill"
                 app:tabPaddingStart="4dp"
                 app:tabPaddingEnd="4dp"
-                android:minWidth="50dp"
+                app:tabMinWidth="50dp"
                 app:tabMode="scrollable"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

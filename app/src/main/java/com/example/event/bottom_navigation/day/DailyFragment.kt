@@ -13,8 +13,8 @@ import com.example.event.databinding.FragmentDailyBinding
 class DailyFragment(_position: Int, _daysPagerAdapter: DaysPagerAdapter) : Fragment() {
     private lateinit var binding: FragmentDailyBinding
 
-    val position = _position
-    val daysPagerAdapter = _daysPagerAdapter
+    private val position = _position
+    private val daysPagerAdapter = _daysPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
